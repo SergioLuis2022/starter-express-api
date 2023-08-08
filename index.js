@@ -1,7 +1,11 @@
-const express = require('express')
-const app = express()
-app.all('/', (req, res) => {
-    console.log("Just got a request!")
-    res.send('Yo!')
-})
-app.listen(process.env.PORT || 3000)
+if (process.env.NODE_ENV !== "production") {
+    require("dotenv").config();
+}
+
+const app = require("./src/app")
+const port = process.env.PORT;
+
+app.listen(port, () => { 
+    console.log("Running on port", port);
+    console.log("Environment", process.env.NODE_ENV);
+});
